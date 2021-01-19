@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <style>
+            body{
+                color: aliceblue;
+                background-color: black;
+                font-family:'jetbrain';
+            }
+            @font-face {
+                font-family: 'Calculator';
+                src: url("Calculator.ttf");
+                font-family: 'jetbrain';
+                src: url("JetBrainsMono-BoldItalic.ttf");
+            }
+            button{
+                border: 1px solid rgb(66, 60, 60);
+                font-family: 'jetbrain';
+                font-size: medium;
+                align-self: center;
+                padding: 2%;
+                transition-duration: 0.5s;
+                background-color: cadetblue;
+                border-radius: 15px;
+                
+            }
+            #result{
+                background-color: rgb(151, 144, 144);
+                color:rgb(0, 0, 0);
+                padding: 0% 2%;
+                width: 17%;
+                height: 1%;
+                
+                border-radius: 10px;
+                font-family: 'Calculator';
+                font-size: 25px;
+                text-align: left;
+            }
+            #zero{
+                padding-right: 7.5%;
+
+            }
+            button:hover{
+                background-color: azure;
+            }
+            #minus{
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+            }
+            text{
+                background-color: aliceblue;
+            }
+            button:active{
+                background-color: beige;
+            }
+            button:focus{
+                background-color:bisque;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            var num = ""
+            var isOp = false
+
+            var regex = /^(\d+)([\+\-\*\/])(\d+)/
+            function addNumber(number){
+                num += number
+                document.getElementById("result").innerHTML = num
+            }
+            function addOper(oper){
+
+                if(isOp){
+                    re = num.match(regex)
+                    if (re != null){
+                        switch (re[2]) {
+                            case "+":
+                                num = parseInt(re[1]) + parseInt(re[3])
+                                break
+                            case "-":
+                                num = parseInt(re[1]) - parseInt(re[3])
+                                break
+                            case "*":
+                                num = parseInt(re[1]) * parseInt(re[3])
+                                break
+                            case "/":
+                                num = parseInt(parseInt(re[1]) / parseInt(re[3]))
+                                break
+                        }
+                        num = num.toString()
+                    }
+                else return
+                
+                }
+                if (oper == "="){
+                    isOp = false
+                    num = num 
+                    document.getElementById("result").innerHTML = num
+                    return
+                }
+                num += oper 
+                isOp = true 
+                document.getElementById("result").innerHTML = num       
+            }   
+        </script>
+        <text>
+            <div id='Calculator' align="center">
+            <div id="result">
+            <br><label type="button">Press any key</label><br><br>
+            </div>
+            <button type="button" id="1" onclick="addNumber(1)">1</button>
+            <button type="button" id="2" onclick="addNumber(2)">2</button>
+            <button type="button" id="3" onclick="addNumber(3)">3</button>
+            <button type="button" id="/" onclick="addOper('/')">÷</button><br>
+            <button type="button" id="4" onclick="addNumber(4)">4</button>
+            <button type="button" id="5" onclick="addNumber(5)">5</button>
+            <button type="button" id="6" onclick="addNumber(6)">6</button>
+            <button type="button" id="*" onclick="addOper('*')">*</button><br>
+            <button type="button" id="7" onclick="addNumber(7)">7</button>
+            <button type="button" id="8" onclick="addNumber(8)">8</button>
+            <button type="button" id="9" onclick="addNumber(9)">9</button>
+            <button type="button" id="+" onclick="addOper('+')">+</button><br>
+            <button type="button" id="zero" onclick="addNumber(0)">0</button>
+            <button type="button" id="equals" onclick="addOper('=')">=</button>
+            <button type="button" id="minus" onclick="addOper('-')">--</button><br>
+            A simple calculator by Liveira
+        </div>
+        </text>
+    </body>
+</html>
